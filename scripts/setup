@@ -33,12 +33,14 @@ while [[ ! $https_proxy =~ ^(y|n)$ ]]; do
 done
 
 coturn=""
-if [ "$https_proxy" == "y" ]
-then
-    while [[ ! $coturn =~ ^(y|n)$ ]]; do
-        read -p "Should a coturn be included? (y/n): " coturn
-    done
-fi
+# comment out due to blocked TURN ports
+# https://github.com/bigbluebutton/docker/issues/73
+# if [ "$https_proxy" == "y" ]
+# then
+#     while [[ ! $coturn =~ ^(y|n)$ ]]; do
+#         read -p "Should a coturn be included? (y/n): " coturn
+#     done
+# fi
 
 prometheus_exporter=""
 while [[ ! $prometheus_exporter =~ ^(y|n)$ ]]; do

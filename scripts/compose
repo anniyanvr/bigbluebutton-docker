@@ -22,6 +22,30 @@ if [ -z "$EXTERNAL_IPv4" ]; then
     exit 1
 fi
 
+# check for blocked TURN port
+# https://github.com/bigbluebutton/docker/issues/73
+if [ -n "$TURN_SERVER" ]; then
+    port=$(echo $TURN_SERVER | awk -F: '{print $3}' | awk -F'?'  '{print $1}')
+    if [[ "$port" -lt "1024" ]] && [ "$port" != "443" ] && [ "$port" != "80" ]; then
+        echo "-------------------------------------"
+        echo "ERROR: you use the TURN port $port, which gets blocked by recent browser"
+        echo "releases, leading BBB throwing always an 1006 error, connecting impossible."
+        echo ""
+        echo "If you use the integrated TURN server, there is currently no way to make it"
+        echo "work. so you should disable the server by emptying the TURN_SERVER variable"
+        echo "in .env"
+        echo "If you use an external TURN server with an own IP, you should switch to"
+        echo "port 443"
+        echo ""
+        echo "More Information: https://github.com/bigbluebutton/docker/issues/73"
+        echo
+        echo "current setting:"
+        echo "TURN_SERVER=$TURN_SERVER"
+        echo "-------------------------------------"
+        exit 1
+    fi
+fi
+
 # set conditional variables
 export CERTIFICATE_DOMAINS=$DOMAIN
 export GREENLIGHT_ENDPOINT=https://$DOMAIN/bigbluebutton/api/
