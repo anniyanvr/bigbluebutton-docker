@@ -4,19 +4,20 @@
 
 ## About the upcoming BigBlueButton 2.3
 the `v2.3.x` branch became now `develop` at the official [bigbluebutton/docker](https://github.com/bigbluebutton/docker) repository :tada:
-- If you want to support the development, check out that repo! :)
-- If you want a stable release, stay here!
-
+- Maintaining both branches is currently requires too much effort for me (@alangecker), why I limit the work now on developing updates for [bbb-docker 2.3](https://github.com/bigbluebutton/docker)
+- Consider using 2.3.x for new installations, because 2.2.x (this repo) will become obsolete soon without a simple upgrading path.
 
 ## Features
 - Easy installation
 - Greenlight included
-- TURN server included
+- ~~TURN server included~~ (disabled due to [blocked TURN ports](https://github.com/bigbluebutton/docker/issues/73))
 - Fully automated HTTPS certificates
 - Runs on almost any major linux distributon (Debian, Ubuntu, CentOS,...)
 - Full IPv6 support
 
 ## Install
+
+1. **Important:** I recommend using [bbb-docker 2.3.x](https://github.com/bigbluebutton/docker) for new installations, because 2.2.x (this repo) will become obsolete soon without a simple upgrading path.
 1. Install docker-ce & docker-compose
     1. follow instructions
         * Debian: https://docs.docker.com/engine/install/debian/
